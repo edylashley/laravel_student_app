@@ -34,6 +34,18 @@
             border-radius: 4px;
             text-decoration: none;
         }
+        .action-button {
+            padding: 6px 10px;
+            margin-right: 5px;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .delete-button {
+            background-color: #dc3545;
+        }
     </style>
 </head>
 <body>
@@ -49,6 +61,7 @@
                 <th>Email</th>
                 <th>Age</th>
                 <th>Course</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -58,6 +71,17 @@
                 <td>{{ $student->email }}</td>
                 <td>{{ $student->age }}</td>
                 <td>{{ $student->course }}</td>
+                <td>
+                    <a href="{{ route('students.edit', $student->id) }}">
+                        <button class="action-button">Edit</button>
+                    </a>
+
+                    <form action="{{ route('students.destroy', $student->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="action-button delete-button" onclick="return confirm('Are you sure you want to delete this student?')">Delete</button>
+                    </form>
+                </td>
             </tr>
             @endforeach
         </tbody>

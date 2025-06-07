@@ -37,4 +37,28 @@ class StudentController extends Controller
         // Redirect back to students list with success message
         return redirect()->route('students.index')->with('success', 'Student added successfully!');
     }
+
+    // Show the form to edit a student
+public function edit($id)
+{
+    $student = Student::findOrFail($id);
+    return view('students.edit', compact('student'));
+}
+
+// Handle the update request
+public function update(Request $request, $id)
+{
+    $student = Student::findOrFail($id);
+    $student->update($request->all());
+    return redirect()->route('students.index');
+}
+
+// Delete the student
+public function destroy($id)
+{
+    $student = Student::findOrFail($id);
+    $student->delete();
+    return redirect()->route('students.index');
+}
+
 }
