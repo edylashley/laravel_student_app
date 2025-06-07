@@ -20,10 +20,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     @auth
-<form action="{{ route('auth.logout') }}" method="POST">
+<form action="{{ route('logout') }}" method="POST">
     @csrf
     <button type="submit" class="btn btn-outline-danger">Logout</button>
 </form>
+
 @endauth
 
 </body>

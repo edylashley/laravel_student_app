@@ -1,35 +1,33 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
-// Redirect root URL to /login
+// Redirect root to login
 Route::get('/', function () {
-    return redirect()->route('login');
+    return redirect('/login');
 });
 
-// Show login form
+// LOGIN routes
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-
-// Handle login form submission
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
-
-// Logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// REGISTRATION routes
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('auth.register');
+Route::post('/register', [AuthController::class, 'register'])->name('auth.register.submit');
 
 // Protected routes
 Route::middleware(['auth'])->group(function () {
-    // Student resource controller
     Route::resource('students', StudentController::class);
-
-    // Profile routes (optional)
+    
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-    Route::get('/register', function () {
-    return "Register page will be here soon.";
-})->name('auth.register');
