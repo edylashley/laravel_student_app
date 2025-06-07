@@ -16,14 +16,32 @@
         th {
             background-color: #eee;
         }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 80%;
+            margin: 30px auto 10px auto;
+        }
         h1 {
-            text-align: center;
-            margin-top: 30px;
+            margin: 0;
+        }
+        .add-button {
+            padding: 8px 12px;
+            background-color: #3490dc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
-    <h1>Student List</h1>
+    <div class="header-container">
+        <h1>Student List</h1>
+        <a href="{{ route('students.create') }}" class="add-button">Add New Student</a>
+    </div>
+
     <table>
         <thead>
             <tr>
